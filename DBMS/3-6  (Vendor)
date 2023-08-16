@@ -1,0 +1,95 @@
+
+600 6. a. List the Vendors who have delivered products within 6 months from order date.
+601
+602 SQL> SELECT v.vendor_name
+603 2 FROM vendors v
+604 3 JOIN orders o ON v.vendor_id = o.vendor_id
+605 4 JOIN products p ON o.product_id = p.product_id
+606 5 WHERE o.order_date >= ADD_MONTHS(p.delivery_date, -6);
+607
+608 VENDOR_NAME
+609 --------------------------------------------------
+610 Vendor1
+611 Vendor1
+612 Vendor2
+613 Vendor2
+614
+615 6. b. Display the Vendor details who have supplied both Assembled and Subparts.
+616
+617 SQL> SELECT v.vendor_id, v.vendor_name
+618 2 FROM vendors v
+619 3 JOIN vendor_parts vp ON v.vendor_id = vp.vendor_id
+620 4 JOIN parts p ON vp.part_id = p.part_id
+621 5 WHERE p.part_type IN ('ASSEMBLED', 'SUB');
+622
+623 VENDOR_ID VENDOR_NAME
+624 ---------- --------------------------------------------------
+625 1 Vendor1
+626 1 Vendor1
+627 2 Vendor2
+628
+629 6. c. Display the Sub parts by grouping the Vendor type (Local or NonLocal).
+630
+631 SQL> SELECT v.vendor_type, p.part_name
+632 2 FROM vendors v
+633 3 JOIN vendor_parts vp ON v.vendor_id = vp.vendor_id
+634 4 JOIN parts p ON vp.part_id = p.part_id
+635 5 WHERE p.part_type = 'SUB'
+636 6 GROUP BY v.vendor_type, p.part_name;
+637
+638 VENDOR_TYPE
+639 --------------------------------------------------
+640 PART_NAME
+641 --------------------------------------------------
+642 Local
+643 Part2
+644
+645 Non Local
+646 Part2
+647
+648 6. d. Display the Vendor details in ascending order.
+649
+650 SQL> SELECT vendor_id, vendor_name
+651 2 FROM vendors
+652 3 ORDER BY vendor_name ASC;
+653
+654 VENDOR_ID VENDOR_NAME
+655 ---------- --------------------------------------------------
+656 1 Vendor1
+657 2 Vendor2
+658
+659 6. e. Display the Sub part which costs more than any of the Assembled parts
+660
+661 SQL> INSERT INTO parts (part_id, part_name, part_type, part_cost)
+662 2 VALUES (4, 'SubPart1', 'SUB', 280);
+663
+664 1 row created.
+665
+666 SQL> SELECT p.part_name, p.part_cost
+667 2 FROM parts p
+668 3 WHERE p.part_type = 'SUB' AND p.part_cost > (
+669 4 SELECT MAX(part_cost)
+670 5 FROM parts
+671 6 WHERE part_type = 'ASSEMBLED'
+672 7 );
+673
+674 PART_NAME PART_COST
+675 -------------------------------------------------- ----------
+676 SubPart1 280
+677
+678 SQL> DELETE FROM parts
+679 2 WHERE part_id IN (4);
+680
+681 6. f. Display the second maximum cost Assembled part
+682
+683 SQL> SELECT p.part_name, p.part_cost
+684 2 FROM parts p
+685 3 WHERE p.part_type = 'ASSEMBLED'
+686 4 ORDER BY p.part_cost DESC
+687 5 OFFSET 1 ROW FETCH FIRST 1 ROW ONLY;
+688
+689 PART_NAME PART_COST
+690 -------------------------------------------------- ----------
+691 Part1 100
+692
+693

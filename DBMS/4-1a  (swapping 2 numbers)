@@ -1,0 +1,27 @@
+Write a PL/SQL program for swapping 2 numbers
+SET SERVEROUTPUT ON;
+DECLARE
+A NUMBER (3);
+B NUMBER (3);
+BEGIN
+A:=&A;
+B:=&B;
+DBMS_OUTPUT.PUT_LINE ('BEFORE SWAPING A='||A||'AND B='||B);
+A:=A+B;
+B:=A-B;
+A:=A-B;
+DBMS_OUTPUT.PUT_LINE ('AFTER SWAPING A='||A||'AND B='||B);
+END;
+=============================
+OUTPUT:
+SQL> @swap.sql
+13 /
+Enter value for a: 10
+old 5: A:=&A;
+new 5: A:=10;
+Enter value for b: 20
+old 6: B:=&B;
+new 6: B:=20;
+BEFORE SWAPING A=10AND B=20
+AFTER SWAPING A=20AND B=10
+PL/SQL procedure successfully completed.

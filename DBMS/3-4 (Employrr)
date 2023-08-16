@@ -1,0 +1,70 @@
+4. a. Count the number of employees in department 20
+461
+462 SQL> SELECT COUNT(*) AS employee_count
+463 2 FROM emp
+464 3 WHERE deptno = 20;
+465
+466 EMPLOYEE_COUNT
+467 --------------
+468 0
+469
+470 4. b. Find the minimum salary earned by clerk.
+471
+472 SQL> INSERT INTO emp (empno, ename, job, salary, deptno)
+473 2 VALUES (3, 'Bob Johnson', 'Clerk', 1500, 10);
+474
+475 SQL> SELECT MIN(salary) AS min_salary
+476 2 FROM emp
+477 3 WHERE job = 'CLERK';
+478
+479 MIN_SALARY
+480 ----------
+481 1500
+482
+483 SQL> DELETE FROM emp
+484 2 WHERE empno IN (3);
+485
+486 1 row deleted.
+487
+488 4. c. Find minimum, maximum, average salary of all employees.
+489
+490 SQL> SELECT MIN(salary) AS min_salary, MAX(salary) AS max_salary, AVG(salary) AS
+average_salary
+491 2 FROM emp;
+492
+493 MIN_SALARY MAX_SALARY AVERAGE_SALARY
+494 ---------- ---------- --------------
+495 2000 5000 3500
+496
+497 4. d. List the minimum and maximum salaries for each job type.
+498
+499 SQL> SELECT job, MIN(salary) AS min_salary, MAX(salary) AS max_salary
+500 2 FROM emp
+501 3 GROUP BY job;
+502
+503 JOB MIN_SALARY MAX_SALARY
+504 -------------------------------------------------- ---------- ----------
+505 Manager 5000 5000
+506 Clerk 2000 2000
+507
+508 4. e. List the employee names in descendingorder.
+509
+510 SQL> SELECT ename
+511 2 FROM emp
+512 3 ORDER BY ename DESC;
+513
+514 ENAME
+515 --------------------------------------------------
+516 John Doe
+517 Jane Smith
+518
+519 4. f. List the employee id, names in ascending order by empid.
+520
+521 SQL> SELECT empno, ename
+522 2 FROM emp
+523 3 ORDER BY empno ASC;
+524
+525 EMPNO ENAME
+526 ---------- --------------------------------------------------
+527 1 John Doe
+528 2 Jane Smith

@@ -1,0 +1,105 @@
+2. a. Calculate the average salary for each different job.
+297
+298 SQL> SELECT job, AVG(salary) AS average_salary
+299 2 FROM emp
+300 3 GROUP BY job;
+301
+302 JOB AVERAGE_SALARY
+303 -------------------------------------------------- --------------
+304 Manager 5500
+305 Clerk 2000
+306 Analyst 4000
+307
+308 2. b. Show the average salary of each job excluding manager.
+309
+310 SQL> SELECT job, AVG(salary) AS average_salary
+311 2 FROM emp
+312 3 WHERE job <> 'Manager'
+313 4 GROUP BY job;
+314
+315 JOB AVERAGE_SALARY
+316 -------------------------------------------------- --------------
+317 Clerk 2000
+318 Analyst 4000
+319
+320 2. c. Show the average salary for all departments employing more than three people.
+321
+322 SQL> INSERT INTO emp (empno, ename, job, salary, deptno)
+323 2 VALUES (3, 'Bob Johnson', 'Clerk', 1500, 10);
+324
+325 1 row created.
+326
+327 SQL> INSERT INTO emp (empno, ename, job, salary, deptno)
+328 2 VALUES (4, 'Alice Williams', 'Analyst', 4000, 10);
+329
+330 1 row created.
+331
+332 SQL> SELECT deptno, AVG(salary) AS average_salary
+333 2 FROM emp
+334 3 GROUP BY deptno
+335 4 HAVING COUNT(*) > 3;
+336
+337 DEPTNO AVERAGE_SALARY
+338 ---------- --------------
+339 10 3125
+340
+341 SQL> DELETE FROM emp
+342 2 WHERE empno IN (3, 4);
+343
+344 2 rows deleted.
+345
+346 2. d. Display employees who earn more than thelowest salary in department 30
+347
+348 SQL> SELECT ename, salary
+349 2 FROM emp
+350 3 WHERE salary > (SELECT MIN(salary) FROM emp WHERE deptno = 30);
+351
+352 ENAME SALARY
+353 -------------------------------------------------- ----------
+354 John Doe 5000
+355 Alice Williams 4000
+356 Mike Brown 6000
+357
+358 2. e. Show that value returned by sign (n) function.
+359
+360 SQL> SELECT SIGN(10) AS sign_value
+361 2 FROM dual;
+362
+363 SIGN_VALUE
+364 ----------
+365 1
+366
+367 2. f. How many days between day of birth to current date
+368
+369 SQL> DROP TABLE emp;
+370
+371 Table dropped.
+372
+373 SQL> CREATE TABLE emp (
+374 2 empno NUMBER,
+375 3 ename VARCHAR2(50),
+376 4 job VARCHAR2(50),
+377 5 salary NUMBER,
+378 6 deptno NUMBER,
+379 7 birthdate DATE
+380 8 );
+381
+382 Table created.
+383
+384 SQL> INSERT INTO emp (empno, ename, job, salary, deptno, birthdate)
+385 2 VALUES (1, 'John Doe', 'Manager', 5000, 10, TO_DATE('1990-06-15', 'YYYY-MM-DD'));
+386
+387 1 row created.
+388
+389 SQL> INSERT INTO emp (empno, ename, job, salary, deptno, birthdate)
+390 2 VALUES (2, 'Jane Smith', 'Clerk', 2000, 10, TO_DATE('1992-09-20', 'YYYY-MM-DD'));
+391
+392 1 row created.
+393
+394 SQL> SELECT empno, ename, TRUNC(SYSDATE) - TRUNC(birthdate) AS days_since_birth
+395 2 FROM emp;
+396
+397 EMPNO ENAME DAYS_SINCE_BIRTH
+398 ---------- -------------------------------------------------- ---------------
+399 1 John Doe 12170
+400 2 Jane Smith 10574

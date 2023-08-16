@@ -1,0 +1,58 @@
+3. a. Show that two sub string as single string.
+403
+404 SQL> SELECT CONCAT(SUBSTR(ename, 1, 3), SUBSTR(ename, -2)) AS combined_string
+405 2 FROM emp;
+406
+407 COMBINED_STRING
+408 --------------------
+409 Johoe
+410 Janth
+411
+412 3. b. List all employee names, salary and 15% rise in salary.
+413
+414 SQL> SELECT ename, salary, salary * 1.15 AS increased_salary
+415 2 FROM emp;
+416
+417 ENAME SALARY INCREASED_SALARY
+418 -------------------------------------------------- ---------- ----------------
+419 John Doe 5000 5750
+420 Jane Smith 2000 2300
+421
+422 3. c. Display lowest paid emp details under eachmanager
+423
+424 SQL> SELECT deptno, MIN(salary) AS lowest_salary
+425 2 FROM emp
+426 3 GROUP BY deptno;
+427
+428 DEPTNO LOWEST_SALARY
+429 ---------- -------------
+430 10 2000
+431
+432 3. d. Display the average monthly salary bill for each deptno.
+433
+434 SQL> SELECT deptno, AVG(salary/12) AS average_monthly_salary_bill
+435 2 FROM emp
+436 3 GROUP BY deptno;
+437
+438 DEPTNO AVERAGE_MONTHLY_SALARY_BILL
+439 ---------- ---------------------------
+440 10 291.666667
+441
+442 3. e. Show the average salary for all departments employing more than two people.
+443
+444 SQL> SELECT deptno, AVG(salary) AS average_salary
+445 2 FROM emp
+446 3 GROUP BY deptno
+447 4 HAVING COUNT(*) > 2;
+448
+449 no rows selected
+450
+451 3. f. By using the group by clause, display the eid who belongs to deptno 05 along with
+average salary.
+452
+453 SQL> SELECT empno, AVG(salary) AS average_salary
+454 2 FROM emp
+455 3 WHERE deptno = 5
+456 4 GROUP BY empno;
+457
+458 no rows selected

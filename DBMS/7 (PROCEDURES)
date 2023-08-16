@@ -1,0 +1,179 @@
+1. Create the procedure for palindrome of given number.
+/*PALINDROME USING PROCEDURES*/
+SET SERVEROUTPUT ON;
+CREATE OR REPLACE PROCEDURE P(N NUMBER)
+IS
+M NUMBER;
+TEMP NUMBER:=0;
+REM NUMBER;
+BEGIN
+M:=N;
+WHILE M>0
+LOOP
+REM:=MOD(M,10);
+TEMP:=(TEMP*10)+REM;
+M:=TRUNC(M/10);
+END LOOP;
+IF N = TEMP
+THEN
+DBMS_OUTPUT.PUT_LINE('PALINDROME');
+ELSE
+DBMS_OUTPUT.PUT_LINE('NOT PALINDROME');
+END IF;
+END;
+OUTPUT:
+SQL> @PAL.SQL
+
+23 /
+Procedure created.
+/* PROCEDURE CALLING*/
+SQL> EXEC P(22);
+PALINDROME
+PL/SQL procedure successfully completed.
+SQL> EXEC P(23);
+NOT PALINDROME
+PL/SQL procedure successfully completed.
+SQL> EXEC P(231);
+NOT PALINDROME
+PL/SQL procedure successfully completed.
+2. Create the procedure for calculating GCD of two numbers
+CREATE OR REPLACE PROCEDURE GCD(NUM1 NUMBER,NUM2 NUMBER)
+IS
+T NUMBER;
+N1 NUMBER:=NUM1;
+N2 NUMBER:=NUM2;
+BEGIN
+WHILE MOD(N2,N1) != 0
+LOOP
+T := MOD(N2,N1);
+N2:=N1;
+N1 := T;
+END LOOP;
+dbms_output.Put_line('GCD of'||NUM1||'and'||NUM2||'is'||NUM1);
+END;
+OUTPUT:
+SQL> @72.sql
+
+20 /
+Procedure created.
+/*CALLING PROCEDURE*/
+SQL> EXEC GCD(8,48);
+GCD of8and48is8
+PL/SQL procedure successfully completed.
+SQL> EXEC GCD(3,33);
+GCD of3and33is3
+PL/SQL procedure successfully completed.
+3. Write the PL/SQL programs to create the procedure for factorial of given number.
+/* FACTORIAL PROCEDURE*/
+CREATE OR REPLACE PROCEDURE FAC (N NUMBER)
+IS
+F NUMBER(4);
+I NUMBER(4);
+BEGIN
+F:=1;
+I:=1;
+FOR I IN 1..N
+LOOP
+F:=F*I;
+END LOOP;
+DBMS_OUTPUT.PUT_LINE ('FACTORIAL OS GIVEN NUMBER:'||N||'=IS='||F);
+END;
+OUTPUT:
+SQL> @73.SQL
+15 /
+Procedure created.
+SQL> EXEC FAC(5);
+FACTORIAL OS GIVEN NUMBER:5=IS=120
+
+PL/SQL procedure successfully completed.
+SQL> EXEC FAC(7);
+FACTORIAL OS GIVEN NUMBER:7=IS=5040
+PL/SQL procedure successfully completed.
+4. Write the PL/SQL programs to create the procedure to find sum of N natural number.
+/* SUM OF N NATURAL NUMBERS PROCEDURE*/
+CREATE OR REPLACE PROCEDURE FAC (N NUMBER)
+IS
+F NUMBER(4);
+I NUMBER(4);
+BEGIN
+F:=0;
+I:=1;
+FOR I IN 1..N
+LOOP
+F:=F+I;
+END LOOP;
+DBMS_OUTPUT.PUT_LINE ('SUM OF NATURAL NUMBERS ARE :'||N||'=IS='||F);
+END;
+OUTPUT:
+SQL> @51C.SQL
+19 /
+Function created.
+SQL> EXEC SUMOFN (5);
+SUM OF NATURAL NUMBERS ARE: 5=IS=16
+PL/SQL procedure successfully completed.
+
+5. Write the PL/SQL programs to create the procedure to find Fibonacci series.
+/* FABINOCCI SERIES USING PROCEDURE*/
+CREATE OR REPLACE PROCEDURE FIBONAC(N NUMBER)
+IS
+A NUMBER := 0;
+B NUMBER := 1;
+TEMP NUMBER;
+I NUMBER;
+BEGIN
+DBMS_OUTPUT.PUT_LINE('FIBONACCI SERIES IS :');
+DBMS_OUTPUT.PUT_LINE(A);
+DBMS_OUTPUT.PUT_LINE(B);
+FOR I IN 2..N
+LOOP
+TEMP:= A + B;
+A := B;
+B := TEMP;
+DBMS_OUTPUT.PUT_LINE(TEMP);
+END LOOP;
+END;
+OUTPUT:
+SQL> @75.SQL
+19 /
+Procedure created.
+SQL> EXEC FIBONAC(4);
+fibonacci series is :
+0
+1
+1
+2
+3
+PL/SQL procedure successfully completed.
+6. Write the PL/SQL programs to create the procedure to check the given number is
+perfect or not
+/* PERFECT NUMBER USING PROCEDURE */
+
+CREATE OR REPLACE PROCEDURE PERFECT1(N NUMBER)
+IS
+I NUMBER;
+TOT NUMBER;
+BEGIN
+TOT:=0;
+FOR I IN 1..N/2
+LOOP
+IF MOD(N,I)=0
+THEN
+TOT:= TOT+I;
+END IF;
+END LOOP;
+IF(N=TOT)THEN
+DBMS_OUTPUT.PUT_LINE('PERFECT NO');
+ELSE
+DBMS_OUTPUT.PUT_LINE('NOT A PERFECT NO');
+END IF;
+END;
+OUTPUT:
+SQL> @ 76.SQL
+20 /
+Procedure created.
+SQL> EXEC PERFECT1(3);
+NOT A PERFECT NO
+PL/SQL procedure successfully completed.
+SQL> EXEC PERFECT1(6);
+PERFECT NO
+PL/SQL procedure successfully completed.

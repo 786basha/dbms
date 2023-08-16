@@ -1,0 +1,29 @@
+SET SERVEROUTPUT ON
+SET VERIFY OFF
+ACCEPT VSTRING PROMPT "PLEASE ENTER YOUR STRING: ";
+DECLARE
+VNEWSTRING VARCHAR2 (100);
+BEGIN
+VNEWSTRING: = REGEXP_REPLACE ('&VSTRING', '[AEIOUAEIOU]','');
+DBMS_OUTPUT.PUT_LINE ('THE NEW STRING IS: ' || VNEWSTRING);
+Prepared By KCHV Page 8
+END;
+OUTPUT:
+SQL> @5A.SQL
+Please enter your string: HELLO
+8 /
+The new string is: HLL
+PL/SQL procedure successfully completed.
+SQL> /
+The new string is: HLL
+PL/SQL procedure successfully completed.
+SQL> @5A.SQL
+Please enter your string: Hello
+8 /
+The new string is: Hll
+PL/SQL procedure successfully completed.
+SQL> @5A.SQL
+Please enter your string: CHIRU
+8 /
+The new string is: CRU
+PL/SQL procedure successfully completed

@@ -1,0 +1,33 @@
+DECLARE
+A NUMBER := 0;
+B NUMBER := 1;
+TEMP NUMBER;
+Prepared By KCHV Page 13
+N NUMBER := &N;
+I NUMBER;
+BEGIN
+DBMS_OUTPUT.PUT_LINE('FIBONACCI SERIES IS :');
+DBMS_OUTPUT.PUT_LINE(A);
+DBMS_OUTPUT.PUT_LINE(B);
+FOR I IN 2..N
+LOOP
+TEMP:= A + B;
+A := B;
+B := TEMP;
+DBMS_OUTPUT.PUT_LINE(TEMP);
+END LOOP;
+END;
+OUTPUT:
+SQL> @54.SQL
+19 /
+Enter value for n: 5
+old 5: n number := &n;
+new 5: n number := 5;
+fibonacci series is :
+0
+1
+1
+2
+3
+5
+PL/SQL procedure successfully completed

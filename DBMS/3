@@ -1,0 +1,646 @@
+
+60
+61 1 row created.
+62
+63 SQL> INSERT INTO emp (empno, ename, job, salary, deptno)
+64 2 VALUES (5, 'Mike Brown', 'Manager', 6000, 30);
+65
+66 1 row created.
+67
+68 SQL> INSERT INTO emp (empno, ename, job, salary, deptno)
+69 2 VALUES (6, 'Sarah Davis', 'Clerk', 2500, 30);
+70
+71 1 row created.
+72
+73 SQL> INSERT INTO dept (deptno, dname, location)
+74 2 VALUES (10, 'Accounting', 'New York');
+75
+76 1 row created.
+77
+78 SQL> INSERT INTO dept (deptno, dname, location)
+79 2 VALUES (20, 'Sales', 'Chicago');
+80
+81 1 row created.
+82
+83 SQL> INSERT INTO dept (deptno, dname, location)
+84 2 VALUES (30, 'Marketing', 'Los Angeles');
+85
+86 1 row created.
+87
+88 SQL> INSERT INTO sailors (sid, sname, bdate, rating)
+89 2 VALUES (1, 'John', TO_DATE('1990-01-01', 'YYYY-MM-DD'), 8);
+90
+91 1 row created.
+92
+93 SQL> INSERT INTO sailors (sid, sname, bdate, rating)
+94 2 VALUES (2, 'Jane', TO_DATE('1992-05-15', 'YYYY-MM-DD'), 6);
+95
+96 1 row created.
+97
+98 SQL> INSERT INTO sailors (sid, sname, bdate, rating)
+99 2 VALUES (3, 'Bob', TO_DATE('1995-09-30', 'YYYY-MM-DD'), 7);
+100
+101 1 row created.
+102
+103 SQL> INSERT INTO sailors (sid, sname, bdate, rating)
+104 2 VALUES (4, 'Alice', TO_DATE('1991-07-20', 'YYYY-MM-DD'), 9);
+105
+106 1 row created.
+107
+108 SQL> INSERT INTO boats (bid, bname, color)
+109 2 VALUES (1, 'Boat1', 'Red');
+110
+111 1 row created.
+112
+113 SQL> INSERT INTO boats (bid, bname, color)
+114 2 VALUES (2, 'Boat2', 'Blue');
+115
+116 1 row created.
+117
+118 SQL> INSERT INTO boats (bid, bname, color)
+119 2 VALUES (3, 'Boat3', 'Red');
+120
+121 1 row created.
+122
+123 SQL> INSERT INTO reserves (sid, bid, rdate)
+124 2 VALUES (1, 1, TO_DATE('2023-06-01', 'YYYY-MM-DD'));
+125
+126 1 row created.
+127
+128 SQL> INSERT INTO reserves (sid, bid, rdate)
+129 2 VALUES (1, 2, TO_DATE('2023-06-05', 'YYYY-MM-DD'));
+130
+131 1 row created.
+132
+133 SQL> INSERT INTO reserves (sid, bid, rdate)
+134 2 VALUES (2, 1, TO_DATE('2023-06-02', 'YYYY-MM-DD'));
+135
+136 1 row created.
+137
+138 SQL> INSERT INTO reserves (sid, bid, rdate)
+139 2 VALUES (3, 2, TO_DATE('2023-06-07', 'YYYY-MM-DD'));
+140
+141 1 row created.
+142
+143 SQL> INSERT INTO vendors (vendor_id, vendor_name, vendor_type)
+144 2 VALUES (1, 'Vendor1', 'Local');
+145
+146 1 row created.
+147
+148 SQL> INSERT INTO vendors (vendor_id, vendor_name, vendor_type)
+149 2 VALUES (2, 'Vendor2', 'Non Local');
+150
+151 1 row created.
+152
+153 SQL> INSERT INTO orders (order_id, vendor_id, product_id, order_date)
+154 2 VALUES (1, 1, 1, TO_DATE('2023-01-10', 'YYYY-MM-DD'));
+155
+156 1 row created.
+157
+158 SQL> INSERT INTO orders (order_id, vendor_id, product_id, order_date)
+159 2 VALUES (2, 1, 2, TO_DATE('2023-02-15', 'YYYY-MM-DD'));
+160
+161 1 row created.
+162
+163 SQL> INSERT INTO orders (order_id, vendor_id, product_id, order_date)
+164 2 VALUES (3, 2, 1, TO_DATE('2023-03-20', 'YYYY-MM-DD'));
+165
+166 1 row created.
+167
+168 SQL> INSERT INTO orders (order_id, vendor_id, product_id, order_date)
+169 2 VALUES (4, 2, 2, TO_DATE('2023-04-25', 'YYYY-MM-DD'));
+170
+171 1 row created.
+172
+173 SQL> INSERT INTO products (product_id, product_name, delivery_date)
+174 2 VALUES (1, 'Product1', TO_DATE('2022-12-01', 'YYYY-MM-DD'));
+175
+176 1 row created.
+177
+178 SQL> INSERT INTO products (product_id, product_name, delivery_date)
+179 2 VALUES (2, 'Product2', TO_DATE('2022-12-15', 'YYYY-MM-DD'));
+180
+181 1 row created.
+182
+183 SQL> INSERT INTO vendor_parts (vendor_id, part_id)
+184 2 VALUES (1, 1);
+185
+186 1 row created.
+187
+188 SQL> INSERT INTO vendor_parts (vendor_id, part_id)
+189 2 VALUES (1, 2);
+190
+191 1 row created.
+192
+193 SQL> INSERT INTO vendor_parts (vendor_id, part_id)
+194 2 VALUES (2, 2);
+195
+196 1 row created.
+197
+198 SQL> INSERT INTO parts (part_id, part_name, part_type, part_cost)
+199 2 VALUES (1, 'Part1', 'ASSEMBLED', 100);
+200
+201 1 row created.
+202
+203 SQL> INSERT INTO parts (part_id, part_name, part_type, part_cost)
+204 2 VALUES (2, 'Part2', 'SUB', 80);
+205
+206 1 row created.
+207
+208 SQL> INSERT INTO parts (part_id, part_name, part_type, part_cost)
+209 2 VALUES (3, 'Part3', 'ASSEMBLED', 150);
+210
+211 1 row created.
+212
+213 1. a. By using the group by clause, display the enames who belongs to deptno 10 along
+with average salary.
+214
+215 SQL> SELECT ename, AVG(salary) AS average_salary FROM emp WHERE deptno = 10 GROUP BY
+ename;
+216
+217 ENAME AVERAGE_SALARY
+218 -------------------------------------------------- --------------
+219 John Doe 5000
+220 Jane Smith 2000
+221
+222 1. b. Display lowest paid employee details under each department.
+223
+224 SQL> SELECT deptno, ename, job, salary
+225 2 FROM (
+226 3 SELECT deptno, ename, job, salary,
+227 4 ROW_NUMBER() OVER (PARTITION BY deptno ORDER BY salary) AS rn
+228 5 FROM emp
+229 6 )
+230 7 WHERE rn = 1;
+231
+232 DEPTNO ENAME
+233 ---------- --------------------------------------------------
+234 JOB SALARY
+235 -------------------------------------------------- ----------
+236 10 Jane Smith
+237 Clerk 2000
+238
+239 20 Bob Johnson
+240 Clerk 1500
+241
+242 30 Sarah Davis
+243 Clerk 2500
+244
+245 1. c. Display number of employees working in each department and their department number.
+246
+247 SQL> SELECT deptno, COUNT(*) AS employee_count
+248 2 FROM emp
+249 3 GROUP BY deptno;
+250
+251 DEPTNO EMPLOYEE_COUNT
+252 ---------- --------------
+253 10 2
+254 20 2
+255 30 2
+256
+257 1. d. Using built in functions, display number of employees working in each department
+and their department name from dept table. Insert deptname to dept table and insert
+deptname for each row, do the required thing specified above.
+258
+259 SQL> INSERT INTO dept (deptno, dname)
+260 2 VALUES (10, 'Sales');
+261
+262 1 row created.
+263
+264 SQL> SELECT d.deptno, d.dname, COUNT(*) AS employee_count
+265 2 FROM emp e
+266 3 JOIN dept d ON e.deptno = d.deptno
+267 4 GROUP BY d.deptno, d.dname;
+268
+269 DEPTNO DNAME EMPLOYEE_COUNT
+270 ---------- -------------------------------------------------- --------------
+271 10 Accounting 2
+272 10 Sales 2
+273 20 Sales 2
+274 30 Marketing 2
+275
+276 1. e. List all employees which start with either B or C.
+277
+278 SQL> SELECT ename
+279 2 FROM emp
+280 3 WHERE ename LIKE 'B%' OR ename LIKE 'C%';
+281
+282 ENAME
+283 --------------------------------------------------
+284 Bob Johnson
+285
+286 1. f. Display only these ename of employees where the maximum salary is greater than or
+equalto 5000.
+287
+288 SQL> SELECT ename
+289 2 FROM emp
+290 3 WHERE salary >= (SELECT MAX(salary) FROM emp) AND salary >= 5000;
+291
+292 ENAME
+293 --------------------------------------------------
+294 Mike Brown
+295
+296 2. a. Calculate the average salary for each different job.
+297
+298 SQL> SELECT job, AVG(salary) AS average_salary
+299 2 FROM emp
+300 3 GROUP BY job;
+301
+302 JOB AVERAGE_SALARY
+303 -------------------------------------------------- --------------
+304 Manager 5500
+305 Clerk 2000
+306 Analyst 4000
+307
+308 2. b. Show the average salary of each job excluding manager.
+309
+310 SQL> SELECT job, AVG(salary) AS average_salary
+311 2 FROM emp
+312 3 WHERE job <> 'Manager'
+313 4 GROUP BY job;
+314
+315 JOB AVERAGE_SALARY
+316 -------------------------------------------------- --------------
+317 Clerk 2000
+318 Analyst 4000
+319
+320 2. c. Show the average salary for all departments employing more than three people.
+321
+322 SQL> INSERT INTO emp (empno, ename, job, salary, deptno)
+323 2 VALUES (3, 'Bob Johnson', 'Clerk', 1500, 10);
+324
+325 1 row created.
+326
+327 SQL> INSERT INTO emp (empno, ename, job, salary, deptno)
+328 2 VALUES (4, 'Alice Williams', 'Analyst', 4000, 10);
+329
+330 1 row created.
+331
+332 SQL> SELECT deptno, AVG(salary) AS average_salary
+333 2 FROM emp
+334 3 GROUP BY deptno
+335 4 HAVING COUNT(*) > 3;
+336
+337 DEPTNO AVERAGE_SALARY
+338 ---------- --------------
+339 10 3125
+340
+341 SQL> DELETE FROM emp
+342 2 WHERE empno IN (3, 4);
+343
+344 2 rows deleted.
+345
+346 2. d. Display employees who earn more than thelowest salary in department 30
+347
+348 SQL> SELECT ename, salary
+349 2 FROM emp
+350 3 WHERE salary > (SELECT MIN(salary) FROM emp WHERE deptno = 30);
+351
+352 ENAME SALARY
+353 -------------------------------------------------- ----------
+354 John Doe 5000
+355 Alice Williams 4000
+356 Mike Brown 6000
+357
+358 2. e. Show that value returned by sign (n) function.
+359
+360 SQL> SELECT SIGN(10) AS sign_value
+361 2 FROM dual;
+362
+363 SIGN_VALUE
+364 ----------
+365 1
+366
+367 2. f. How many days between day of birth to current date
+368
+369 SQL> DROP TABLE emp;
+370
+371 Table dropped.
+372
+373 SQL> CREATE TABLE emp (
+374 2 empno NUMBER,
+375 3 ename VARCHAR2(50),
+376 4 job VARCHAR2(50),
+377 5 salary NUMBER,
+378 6 deptno NUMBER,
+379 7 birthdate DATE
+380 8 );
+381
+382 Table created.
+383
+384 SQL> INSERT INTO emp (empno, ename, job, salary, deptno, birthdate)
+385 2 VALUES (1, 'John Doe', 'Manager', 5000, 10, TO_DATE('1990-06-15', 'YYYY-MM-DD'));
+386
+387 1 row created.
+388
+389 SQL> INSERT INTO emp (empno, ename, job, salary, deptno, birthdate)
+390 2 VALUES (2, 'Jane Smith', 'Clerk', 2000, 10, TO_DATE('1992-09-20', 'YYYY-MM-DD'));
+391
+392 1 row created.
+393
+394 SQL> SELECT empno, ename, TRUNC(SYSDATE) - TRUNC(birthdate) AS days_since_birth
+395 2 FROM emp;
+396
+397 EMPNO ENAME DAYS_SINCE_BIRTH
+398 ---------- -------------------------------------------------- ---------------
+399 1 John Doe 12170
+400 2 Jane Smith 10574
+401
+402 3. a. Show that two sub string as single string.
+403
+404 SQL> SELECT CONCAT(SUBSTR(ename, 1, 3), SUBSTR(ename, -2)) AS combined_string
+405 2 FROM emp;
+406
+407 COMBINED_STRING
+408 --------------------
+409 Johoe
+410 Janth
+411
+412 3. b. List all employee names, salary and 15% rise in salary.
+413
+414 SQL> SELECT ename, salary, salary * 1.15 AS increased_salary
+415 2 FROM emp;
+416
+417 ENAME SALARY INCREASED_SALARY
+418 -------------------------------------------------- ---------- ----------------
+419 John Doe 5000 5750
+420 Jane Smith 2000 2300
+421
+422 3. c. Display lowest paid emp details under eachmanager
+423
+424 SQL> SELECT deptno, MIN(salary) AS lowest_salary
+425 2 FROM emp
+426 3 GROUP BY deptno;
+427
+428 DEPTNO LOWEST_SALARY
+429 ---------- -------------
+430 10 2000
+431
+432 3. d. Display the average monthly salary bill for each deptno.
+433
+434 SQL> SELECT deptno, AVG(salary/12) AS average_monthly_salary_bill
+435 2 FROM emp
+436 3 GROUP BY deptno;
+437
+438 DEPTNO AVERAGE_MONTHLY_SALARY_BILL
+439 ---------- ---------------------------
+440 10 291.666667
+441
+442 3. e. Show the average salary for all departments employing more than two people.
+443
+444 SQL> SELECT deptno, AVG(salary) AS average_salary
+445 2 FROM emp
+446 3 GROUP BY deptno
+447 4 HAVING COUNT(*) > 2;
+448
+449 no rows selected
+450
+451 3. f. By using the group by clause, display the eid who belongs to deptno 05 along with
+average salary.
+452
+453 SQL> SELECT empno, AVG(salary) AS average_salary
+454 2 FROM emp
+455 3 WHERE deptno = 5
+456 4 GROUP BY empno;
+457
+458 no rows selected
+459
+460 4. a. Count the number of employees in department 20
+461
+462 SQL> SELECT COUNT(*) AS employee_count
+463 2 FROM emp
+464 3 WHERE deptno = 20;
+465
+466 EMPLOYEE_COUNT
+467 --------------
+468 0
+469
+470 4. b. Find the minimum salary earned by clerk.
+471
+472 SQL> INSERT INTO emp (empno, ename, job, salary, deptno)
+473 2 VALUES (3, 'Bob Johnson', 'Clerk', 1500, 10);
+474
+475 SQL> SELECT MIN(salary) AS min_salary
+476 2 FROM emp
+477 3 WHERE job = 'CLERK';
+478
+479 MIN_SALARY
+480 ----------
+481 1500
+482
+483 SQL> DELETE FROM emp
+484 2 WHERE empno IN (3);
+485
+486 1 row deleted.
+487
+488 4. c. Find minimum, maximum, average salary of all employees.
+489
+490 SQL> SELECT MIN(salary) AS min_salary, MAX(salary) AS max_salary, AVG(salary) AS
+average_salary
+491 2 FROM emp;
+492
+493 MIN_SALARY MAX_SALARY AVERAGE_SALARY
+494 ---------- ---------- --------------
+495 2000 5000 3500
+496
+497 4. d. List the minimum and maximum salaries for each job type.
+498
+499 SQL> SELECT job, MIN(salary) AS min_salary, MAX(salary) AS max_salary
+500 2 FROM emp
+501 3 GROUP BY job;
+502
+503 JOB MIN_SALARY MAX_SALARY
+504 -------------------------------------------------- ---------- ----------
+505 Manager 5000 5000
+506 Clerk 2000 2000
+507
+508 4. e. List the employee names in descendingorder.
+509
+510 SQL> SELECT ename
+511 2 FROM emp
+512 3 ORDER BY ename DESC;
+513
+514 ENAME
+515 --------------------------------------------------
+516 John Doe
+517 Jane Smith
+518
+519 4. f. List the employee id, names in ascending order by empid.
+520
+521 SQL> SELECT empno, ename
+522 2 FROM emp
+523 3 ORDER BY empno ASC;
+524
+525 EMPNO ENAME
+526 ---------- --------------------------------------------------
+527 1 John Doe
+528 2 Jane Smith
+529
+530 5. a. Find the sids, names of sailors who have reserved all boats called INTERLAKE. Find
+the age of youngest sailor who is eligible to vote for each rating level with at least
+two such sailors.
+531
+532 SQL> SELECT s.sid, s.sname
+533 2 FROM sailors s
+534 3 WHERE NOT EXISTS (
+535 4 SELECT b.bid
+536 5 FROM boats b
+537 6 WHERE b.bname = 'INTERLAKE'
+538 7 AND NOT EXISTS (
+539 8 SELECT r.bid
+540 9 FROM reserves r
+541 10 WHERE r.sid = s.sid
+542 11 AND r.bid = b.bid
+543 12 )
+544 13 );
+545
+546 SID SNAME
+547 ---------- --------------------------------------------------
+548 1 John
+549 2 Jane
+550 3 Bob
+551 4 Alice
+552
+553 5. b. Find the sname , bid and reservation date for each reservation.
+554
+555 SQL> SELECT s.sname, r.bid, r.rdate
+556 2 FROM sailors s
+557 3 JOIN reserves r ON s.sid = r.sid;
+558
+559 SNAME BID RDATE
+560 -------------------------------------------------- ---------- ---------
+561 John 1 01-JUN-23
+562 John 2 05-JUN-23
+563 Jane 1 02-JUN-23
+564 Bob 2 07-JUN-23
+565
+566 5. c. Find the ages of sailors whose name begin and end with B and has at least 3
+characters.
+567
+568 SQL> SELECT s.sname, EXTRACT(YEAR FROM SYSDATE) - EXTRACT(YEAR FROM s.bdate) AS age
+569 2 FROM sailors s
+570 3 WHERE s.sname LIKE 'B_b';
+571
+572 SNAME AGE
+573 -------------------------------------------------- ----------
+574 Bob 28
+575
+576 5. d. List in alphabetic order all sailors who have reserved red boat.
+577
+578 SQL> SELECT s.sname
+579 2 FROM sailors s
+580 3 JOIN reserves r ON s.sid = r.sid
+581 4 JOIN boats b ON r.bid = b.bid
+582 5 WHERE b.color = 'RED'
+583 6 ORDER BY s.sname ASC;
+584
+585 no rows selected
+586
+587 5. e. Find the age of youngest sailor for each rating level.
+588
+589 SQL> SELECT s.rating, MIN(EXTRACT(YEAR FROM SYSDATE) - EXTRACT(YEAR FROM s.bdate)) AS
+youngest_age
+590 2 FROM sailors s
+591 3 JOIN reserves r ON s.sid = r.sid
+592 4 GROUP BY s.rating;
+593
+594 RATING YOUNGEST_AGE
+595 ---------- ------------
+596 8 33
+597 6 31
+598 7 28
+599
+600 6. a. List the Vendors who have delivered products within 6 months from order date.
+601
+602 SQL> SELECT v.vendor_name
+603 2 FROM vendors v
+604 3 JOIN orders o ON v.vendor_id = o.vendor_id
+605 4 JOIN products p ON o.product_id = p.product_id
+606 5 WHERE o.order_date >= ADD_MONTHS(p.delivery_date, -6);
+607
+608 VENDOR_NAME
+609 --------------------------------------------------
+610 Vendor1
+611 Vendor1
+612 Vendor2
+613 Vendor2
+614
+615 6. b. Display the Vendor details who have supplied both Assembled and Subparts.
+616
+617 SQL> SELECT v.vendor_id, v.vendor_name
+618 2 FROM vendors v
+619 3 JOIN vendor_parts vp ON v.vendor_id = vp.vendor_id
+620 4 JOIN parts p ON vp.part_id = p.part_id
+621 5 WHERE p.part_type IN ('ASSEMBLED', 'SUB');
+622
+623 VENDOR_ID VENDOR_NAME
+624 ---------- --------------------------------------------------
+625 1 Vendor1
+626 1 Vendor1
+627 2 Vendor2
+628
+629 6. c. Display the Sub parts by grouping the Vendor type (Local or NonLocal).
+630
+631 SQL> SELECT v.vendor_type, p.part_name
+632 2 FROM vendors v
+633 3 JOIN vendor_parts vp ON v.vendor_id = vp.vendor_id
+634 4 JOIN parts p ON vp.part_id = p.part_id
+635 5 WHERE p.part_type = 'SUB'
+636 6 GROUP BY v.vendor_type, p.part_name;
+637
+638 VENDOR_TYPE
+639 --------------------------------------------------
+640 PART_NAME
+641 --------------------------------------------------
+642 Local
+643 Part2
+644
+645 Non Local
+646 Part2
+647
+648 6. d. Display the Vendor details in ascending order.
+649
+650 SQL> SELECT vendor_id, vendor_name
+651 2 FROM vendors
+652 3 ORDER BY vendor_name ASC;
+653
+654 VENDOR_ID VENDOR_NAME
+655 ---------- --------------------------------------------------
+656 1 Vendor1
+657 2 Vendor2
+658
+659 6. e. Display the Sub part which costs more than any of the Assembled parts
+660
+661 SQL> INSERT INTO parts (part_id, part_name, part_type, part_cost)
+662 2 VALUES (4, 'SubPart1', 'SUB', 280);
+663
+664 1 row created.
+665
+666 SQL> SELECT p.part_name, p.part_cost
+667 2 FROM parts p
+668 3 WHERE p.part_type = 'SUB' AND p.part_cost > (
+669 4 SELECT MAX(part_cost)
+670 5 FROM parts
+671 6 WHERE part_type = 'ASSEMBLED'
+672 7 );
+673
+674 PART_NAME PART_COST
+675 -------------------------------------------------- ----------
+676 SubPart1 280
+677
+678 SQL> DELETE FROM parts
+679 2 WHERE part_id IN (4);
+680
+681 6. f. Display the second maximum cost Assembled part
+682
+683 SQL> SELECT p.part_name, p.part_cost
+684 2 FROM parts p
+685 3 WHERE p.part_type = 'ASSEMBLED'
+686 4 ORDER BY p.part_cost DESC
+687 5 OFFSET 1 ROW FETCH FIRST 1 ROW ONLY;
+688
+689 PART_NAME PART_COST
+690 -------------------------------------------------- ----------
+691 Part1 100
+692
+693

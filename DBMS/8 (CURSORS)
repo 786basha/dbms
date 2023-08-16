@@ -1,0 +1,133 @@
+Write a PL/SQL block that will display the name, dept no, salary of fist highest paid
+employees.
+==================================
+DECLARE
+CURSOR S12 IS SELECT EMPNO, ENAME, SAL FROM EMP WHERE SAL=(SELECT
+MAX(SAL) FROM EMP);
+A_EMPNO EMP.EMPNO%TYPE;
+A_ENAME EMP.ENAME%TYPE;
+A_SAL EMP.SAL%TYPE;
+BEGIN
+OPEN S12;
+LOOP
+FETCH S12 INTO A_EMPNO,A_ENAME,A_SAL;
+EXIT WHEN S12% NOTFOUND;
+DBMS_OUTPUT.PUT_LINE (A_EMPNO||' '||A_ENAME||' '||A_SAL);
+END LOOP;
+CLOSE S12;
+END;
+++++++++++++++
+OUTPUT:
+SQL> @81.SQL
+16 /
+7839 KING 5000
+PL/SQL procedure successfully completed.
+===============================
+3. Write a PL/SQL block that will display the employee details along with salary using cursors.
+===============================
+DECLARE
+CURSOR S2 IS SELECT *FROM EMP;
+A_REC EMP%ROWTYPE;
+BEGIN
+OPEN S2;
+LOOP
+FETCH S2 INTO A_REC;
+EXIT WHEN S2% NOTFOUND;
+DBMS_OUTPUT.PUT_LINE(A_REC.EMPNO||' '||A_REC.ENAME||' '||A_REC.MGR||'
+'||A_REC.SAL);
+END LOOP;
+CLOSE S2;
+END;
+
+OUTPUT:
+SQL> @83.SQL
+14 /
+7499 ALLEN 7698 1600
+7521 WARD 7698 1250
+7654 MARTIN 7698 1250
+7844 TURNER 7698 1500
+7900 JAMES 7698 950
+7934 MILLER 7782 1300
+PL/SQL procedure successfully completed.
+=======================================
+4. To write a Cursor to display the list of employees who are working as a Managers or Analyst
+=======================================
+DECLARE
+CURSOR S IS SELECT * FROM EMP WHERE JOB LIKE 'MANAGER' OR JOB LIKE
+'ANALYST';
+A_EMPNO EMP.EMPNO%TYPE;
+A_REC EMP%ROWTYPE;
+BEGIN
+OPEN S;
+LOOP
+FETCH S INTO A_REC;
+EXIT WHEN S% NOTFOUND;
+DBMS_OUTPUT.PUT_LINE (A_REC.EMPNO||' '||A_REC.ENAME||'
+'||A_REC.JOB||A_REC.MGR||' '||A_REC.HIREDATE||' '||A_REC.SAL||'
+'||A_REC.COMM||' '||A_REC.DEPTNO);
+END LOOP;
+CLOSE S;
+END;
+OUTPUT:
+SQL> @84.SQL
+
+15 /
+7698 BLAKE MANAGER7839 01-MAY-81 2850 30
+7782 CLARK MANAGER7839 09-JUN-81 2450 10
+7566 JONES MANAGER7839 02-APR-81 2975 20
+7788 SCOTT ANALYST7566 19-APR-87 3000 20
+7902 FORD ANALYST7566 03-DEC-81 3000 20
+PL/SQL procedure successfully completed.
+============================================
+5. To write a Cursor to find employee with given job and deptno.
+===========================================
+DECLARE
+CURSOR SA IS SELECT * FROM EMP WHERE JOB='&JOB' AND DEPTNO=&DEPTNO;
+A_EMPNO EMP.EMPNO%TYPE;
+A_REC EMP%ROWTYPE;
+BEGIN
+OPEN SA;
+LOOP
+FETCH SA INTO A_REC;
+EXIT WHEN SA% NOTFOUND;
+DBMS_OUTPUT.PUT_LINE (A_REC.EMPNO||' '||A_REC.ENAME||'
+'||A_REC.JOB||A_REC.MGR||' '||A_REC.HIREDATE||' '||A_REC.SAL||'
+'||A_REC.COMM||' '||A_REC.DEPTNO);
+END LOOP;
+CLOSE SA;
+END;
+OUTPUT:
+SQL> @85.SQL
+15 /
+Enter value for job: MANAGER
+Enter value for deptno: 20
+old 2: CURSOR SA IS SELECT * FROM EMP WHERE JOB='&JOB' AND
+DEPTNO=&DEPTNO;
+new 2: CURSOR SA IS SELECT * FROM EMP WHERE JOB='MANAGER' AND
+DEPTNO=20;
+7566 JONES MANAGER7839 02-APR-81 2975 20
+PL/SQL procedure successfully completed.
+==============================================
+6. Write a PL/SQL block using implicit cursor that will display message, the salaries of all the
+employees in the ‘employee’ table are updated. If none of the employee’s salary are updated
+we get a message 'None of the salaries were updated'. Else we get a message like for example,
+'Salaries for 1000 employees are updated' if there are 1000 rows in ‘employee’ table
+============================================
+DECLARE
+S EMP.SAL%TYPE;
+BEGIN
+S:=&SAL;
+UPDATE EMP SET SAL=S WHERE ENAME='&ENAME';
+DBMS_OUTPUT.PUT_LINE(SQL%ROWCOUNT||'ROWS UPDATED');
+END;
+OUTPUT:
+SQL> @86.SQL
+8 /
+Enter value for sal: 500
+old 4: S:=&SAL;
+new 4: S:=500;
+Enter value for ename: ALLEN
+old 5: UPDATE EMP SET SAL=S WHERE ENAME='&ENAME';
+new 5: UPDATE EMP SET SAL=S WHERE ENAME='ALLEN';
+1ROWS UPDATED
+PL/SQL procedure successfully completed

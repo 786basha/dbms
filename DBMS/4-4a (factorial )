@@ -1,0 +1,23 @@
+SET SERVEROUTPUT ON;
+DECLARE
+I NUMBER(4);
+N NUMBER(4);
+F NUMBER(4);
+BEGIN
+I:=1;
+N:=&N;
+F:=1;
+FOR I IN 1..N
+LOOP
+F:=F*I;
+END LOOP;
+DBMS_OUTPUT.PUT_LINE('THE FACTORIAL OF '||N||' IS:'||F);
+END;
+OUTPUT:
+SQL> @4A.SQL
+15 /
+Enter value for n: 5
+old 7: N:=&N;
+new 7: N:=5;
+THE FACTORIAL OF 5 IS:120
+PL/SQL procedure successfully completed

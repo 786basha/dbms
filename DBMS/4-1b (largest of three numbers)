@@ -1,0 +1,34 @@
+Write a PL/SQL program to find the largest of three numbers.
+SET SERVEROUTPUT ON;
+DECLARE
+A NUMBER;
+B NUMBER;
+C NUMBER;
+BEGIN
+A:=&A;
+B:=&B;
+C:=&C;
+IF (A>B AND A>C) THEN
+DBMS_OUTPUT.PUT_LINE('A IS MAXIMUM ' || A);
+Prepared By KCHV Page 2
+ELSIF (B>A AND B>C) THEN
+DBMS_OUTPUT.PUT_LINE('B IS MAXIMUM ' || B);
+ELSE
+DBMS_OUTPUT.PUT_LINE('C IS MAXIMUM ' || C);
+END IF;
+END;
+=========================
+OUTPUT:
+SQL> @B.SQL
+17 /
+Enter value for a: 10
+old 6: A:=&A;
+new 6: A:=10;
+Enter value for b: 30
+old 7: B:=&B;
+new 7: B:=30;
+Enter value for c: 20
+old 8: C:=&C;
+new 8: C:=20;
+B IS MAXIMUM 30
+PL/SQL procedure successfully completed

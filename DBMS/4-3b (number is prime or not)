@@ -1,0 +1,38 @@
+SET SERVEROUTPUT ON;
+DECLARE
+NUM1 NUMBER(3);
+I NUMBER(2);
+C NUMBER(2);
+BEGIN
+NUM1:=&NUM1;
+I:=1;
+C:=0;
+FOR I IN 1..NUM1
+LOOP
+IF MOD(NUM1,I) = 0
+THEN
+C:=C+1;
+END IF;
+END LOOP;
+IF(C=2) THEN
+DBMS_OUTPUT.PUT_LINE(NUM1||'IS A PRIME');
+ELSE
+DBMS_OUTPUT.PUT_LINE(NUM1||'IS NOT PRIME');
+END IF;
+END;
+OUTPUT:
+SQL> @3B.SQL
+23 /
+Enter value for num1: 5
+old 6: NUM1:=&NUM1;
+new 6: NUM1:=5;
+5IS A PRIME
+PL/SQL procedure successfully completed.
+SQL> @3B.SQL
+23 /
+Enter value for num1: 4
+Prepared By KCHV Page 6
+old 6: NUM1:=&NUM1;
+new 6: NUM1:=4;
+4IS NOT PRIME
+PL/SQL procedure successfully completed

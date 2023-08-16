@@ -1,0 +1,87 @@
+1. a. By using the group by clause, display the enames who belongs to deptno 10 along
+with average salary.
+214
+215 SQL> SELECT ename, AVG(salary) AS average_salary FROM emp WHERE deptno = 10 GROUP BY
+ename;
+216
+217 ENAME AVERAGE_SALARY
+218 -------------------------------------------------- --------------
+219 John Doe 5000
+220 Jane Smith 2000
+221
+222 1. b. Display lowest paid employee details under each department.
+223
+224 SQL> SELECT deptno, ename, job, salary
+225 2 FROM (
+226 3 SELECT deptno, ename, job, salary,
+227 4 ROW_NUMBER() OVER (PARTITION BY deptno ORDER BY salary) AS rn
+228 5 FROM emp
+229 6 )
+230 7 WHERE rn = 1;
+231
+232 DEPTNO ENAME
+233 ---------- --------------------------------------------------
+234 JOB SALARY
+235 -------------------------------------------------- ----------
+236 10 Jane Smith
+237 Clerk 2000
+238
+239 20 Bob Johnson
+240 Clerk 1500
+241
+242 30 Sarah Davis
+243 Clerk 2500
+244
+245 1. c. Display number of employees working in each department and their department number.
+246
+247 SQL> SELECT deptno, COUNT(*) AS employee_count
+248 2 FROM emp
+249 3 GROUP BY deptno;
+250
+251 DEPTNO EMPLOYEE_COUNT
+252 ---------- --------------
+253 10 2
+254 20 2
+255 30 2
+256
+257 1. d. Using built in functions, display number of employees working in each department
+and their department name from dept table. Insert deptname to dept table and insert
+deptname for each row, do the required thing specified above.
+258
+259 SQL> INSERT INTO dept (deptno, dname)
+260 2 VALUES (10, 'Sales');
+261
+262 1 row created.
+263
+264 SQL> SELECT d.deptno, d.dname, COUNT(*) AS employee_count
+265 2 FROM emp e
+266 3 JOIN dept d ON e.deptno = d.deptno
+267 4 GROUP BY d.deptno, d.dname;
+268
+269 DEPTNO DNAME EMPLOYEE_COUNT
+270 ---------- -------------------------------------------------- --------------
+271 10 Accounting 2
+272 10 Sales 2
+273 20 Sales 2
+274 30 Marketing 2
+275
+276 1. e. List all employees which start with either B or C.
+277
+278 SQL> SELECT ename
+279 2 FROM emp
+280 3 WHERE ename LIKE 'B%' OR ename LIKE 'C%';
+281
+282 ENAME
+283 --------------------------------------------------
+284 Bob Johnson
+285
+286 1. f. Display only these ename of employees where the maximum salary is greater than or
+equalto 5000.
+287
+288 SQL> SELECT ename
+289 2 FROM emp
+290 3 WHERE salary >= (SELECT MAX(salary) FROM emp) AND salary >= 5000;
+291
+292 ENAME
+293 --------------------------------------------------
+294 Mike Brown
